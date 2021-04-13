@@ -18,6 +18,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import sql.ConnectionSql;
+
 import java.awt.Color;
 
 public class CadastroCliente {
@@ -182,7 +185,7 @@ public class CadastroCliente {
 
                     sta = connection.createStatement();
                  
-                    try {									// SE J¡ TIVER UMA CONTA COM O MESMO NOME (PRIMARY KEY), ENT√O AO INV…S DE DAR UM ERRO NO CONSOLE, ELE MANDA UMA MENSAGEM COM RETURN (2*)
+                    try {									// SE J√Å TIVER UMA CONTA COM O MESMO NOME (PRIMARY KEY), ENT√ÉO AO INV√âS DE DAR UM ERRO NO CONSOLE, ELE MANDA UMA MENSAGEM COM RETURN (2*)
                     	sta.executeUpdate(query);
 	                    JOptionPane.showMessageDialog(null,"Welcome, " + firstName + ". Your account has been successfully created!");
 	                    
