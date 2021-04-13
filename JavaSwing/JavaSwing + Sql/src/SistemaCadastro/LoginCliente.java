@@ -17,13 +17,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import sql.ConnectionSql;
+
 import java.awt.Color;
 
 
 public class LoginCliente {
 
 	ConnectionSql conn = new ConnectionSql();
-	protected JFrame frame;
+	public JFrame frame;
 	private JPasswordField passwordCliente;
 	private JTextField nomeCliente;
 
@@ -134,25 +137,26 @@ public class LoginCliente {
 	                    connection = conn.connectionMySql();
 	                    st = (PreparedStatement) connection.prepareStatement("Select nome, senha from clientes where nome=? and senha=?");
 	                    String query = "update clientes set logado = true where nome = '" + userName + "';";
-	                    
-	                    
+	                       
 	                    st.setString(1, userName);
 	                    st.setString(2, password);
 	                    
 	                    Statement update = connection.createStatement();
 	                    rs = st.executeQuery();
 	                    
-	                    if (rs.next()) {												// Se houver uma conta no banco de dados com o "userName" e "password" digitados, ent„o ele retorna true, se n„o (2*)
+	                    if (rs.next()) {												// Se houver uma conta no banco de dados com o "userName" e "password" digitados, ent√£o ele retorna true, se n√£o (2*)
 	                    	PrincipalCliente principalCliente = new PrincipalCliente();
 	                    	
+	                 
 	                        JOptionPane.showMessageDialog(null, "You have successfully logged in!");       
 	                        
 	                        
-	                        update.executeUpdate(query);					// A vari·vel "logado" da pessoa referente ao nome que foi digitado (que esta correto), ser· colocada como true (1), quer dizer que a pessoa esta online
+	                        update.executeUpdate(query);					// A vari√°vel "logado" da pessoa referente ao nome que foi digitado (que esta correto), ser√° colocada como true (1), quer dizer que a pessoa esta online
 	                        frame.setVisible(false);						// FECHA A JANELA ATUAL
+	                        principalCliente.initialize();					// Inicializa novamente a janela principal para captar as informa√ß√µes de quem foi logado.
 	                        principalCliente.frame.setVisible(true);		// ABRE A JANELA PRINCIPAL
                  
-	                    } else {																	// (2*) Se uma das informaÁıes estiverem falsas, ent„o aparece uma mensagem de erro
+	                    } else {																	// (2*) Se uma das informa√ß√µes estiverem falsas, ent√£o aparece uma mensagem de erro
 	                        JOptionPane.showMessageDialog(null, "Wrong Username & Password!");
 	                        
 	                    }             
