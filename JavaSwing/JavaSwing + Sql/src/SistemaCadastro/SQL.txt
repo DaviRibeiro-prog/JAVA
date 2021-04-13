@@ -1,9 +1,0 @@
-CREATE DATABASE loja_java;
-
-CREATE TABLE clientes
-( nome varchar(250) NOT NULL,
-  senha varchar(250) NOT NULL,
-  numero varchar(250) NOT NULL,
-  sexo enum('M', 'F') NOT NULL,
-  primary key (nome)
-);
